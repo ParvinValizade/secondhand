@@ -40,15 +40,21 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(mail,updateUserRequest));
     }
 
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<Void> deactiveUser(@PathVariable("id") Long id){
-//        userService.deactiveUser(id);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
-//        userService.deleteUser(id);
-//        return ResponseEntity.ok().build();
-//    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> deactivateUser(@PathVariable("id") Long id){
+        userService.deactivateUser(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}/active")
+    public ResponseEntity<Void> activeUser(@PathVariable("id") Long id){
+        userService.activeUser(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
 }
