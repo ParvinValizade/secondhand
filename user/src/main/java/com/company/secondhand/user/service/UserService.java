@@ -6,12 +6,11 @@ import com.company.secondhand.user.dto.UserDto;
 import com.company.secondhand.user.dto.converter.UserDtoConverter;
 import com.company.secondhand.user.exception.UserIsNotActiveException;
 import com.company.secondhand.user.exception.UserNotFoundException;
-import com.company.secondhand.user.repository.UserRepository;
 import com.company.secondhand.user.model.User;
+import com.company.secondhand.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -34,12 +33,11 @@ public class UserService {
 
     public UserDto createUser(CreateUserRequest userRequest) {
         User user = new User(
-                null,
                 userRequest.getMail(),
                 userRequest.getFirstName(),
                 userRequest.getLastName(),
                 userRequest.getMiddleName(),
-                true
+                false
         );
         return userDtoConverter.convert(userRepository.save(user));
     }
@@ -53,7 +51,8 @@ public class UserService {
                 updateUserRequest.getMail(),
                 updateUserRequest.getFirstName(),
                 updateUserRequest.getLastName(),
-                updateUserRequest.getMiddleName()
+                updateUserRequest.getMiddleName(),
+                true
         );
         return userDtoConverter.convert(userRepository.save(updatedUser));
     }
@@ -62,16 +61,14 @@ public class UserService {
         changeStatusUser(id, false);
     }
 
-    public void activeUser(Long id) {
+    public void activateUser(Long id) {
         changeStatusUser(id, true);
     }
 
     public void deleteUser(Long id) {
-        if (doesUserExist(id)) {
+            findUserById(id);
             userRepository.deleteById(id);
-        } else {
-            throw new UserNotFoundException("User couldn't be found by following id: " + id);
-        }
+
     }
 
     private void changeStatusUser(Long id, Boolean status) {
@@ -96,10 +93,6 @@ public class UserService {
     private User findUserById(Long id) {
         return userRepository.findById(id).
                 orElseThrow(() -> new UserNotFoundException("User couldn't be found by following id: " + id));
-    }
-
-    private boolean doesUserExist(Long id) {
-        return userRepository.existsById(id);
     }
 
 }

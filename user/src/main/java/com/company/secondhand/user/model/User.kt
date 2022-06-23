@@ -26,15 +26,14 @@ data class User(
         null
     )
 
-    constructor(id: Long?,mail: String, firstName: String, lastName: String, middleName: String) : this(
-        id =id,
+    constructor(mail: String, firstName: String, lastName: String, middleName: String,isActive: Boolean?) : this(
+        null,
         mail =mail,
         firstName = firstName,
         lastName = lastName,
         middleName = middleName,
-        null
+        isActive = isActive
     )
-
 
 }
 

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TestSupport {
+    public static Long userId = 100L;
 
     public static List<User> generateUsers() {
         return IntStream.range(0, 5).mapToObj(i ->
@@ -28,5 +29,21 @@ public class TestSupport {
                         from.getLastName(),
                         from.getMiddleName()
                 )).collect(Collectors.toList());
+    }
+
+    public static User generateUser(String mail) {
+        return new User(userId,
+                mail,
+                "fistName" + userId,
+                "lastName" + userId,
+                "",
+                true);
+    }
+
+    public static UserDto generateUserDto(String mail) {
+        return new UserDto(mail,
+                "fistName" + userId,
+                "lastName" + userId,
+                "");
     }
 }
