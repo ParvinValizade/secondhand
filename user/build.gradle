@@ -12,7 +12,9 @@ sourceCompatibility = '11'
 repositories {
     mavenCentral()
 }
-
+bootJar {
+    enabled = false
+}
 dependencies {
 
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
