@@ -31,7 +31,7 @@ public class UserService {
         return userDtoConverter.convert(user);
     }
 
-    public UserDto createUser(CreateUserRequest userRequest) {
+    public UserDto createUser(final CreateUserRequest userRequest) {
         User user = new User(
                 userRequest.getMail(),
                 userRequest.getFirstName(),
@@ -42,7 +42,7 @@ public class UserService {
         return userDtoConverter.convert(userRepository.save(user));
     }
 
-    public UserDto updateUser(String mail, UpdateUserRequest updateUserRequest) {
+    public UserDto updateUser(final String mail,final UpdateUserRequest updateUserRequest) {
         User user = findUserByMail(mail);
         if (Boolean.FALSE.equals(user.isActive())) {
             throw new UserIsNotActiveException("The user wanted update is not active, user mail: " + user.getMail());
@@ -57,21 +57,21 @@ public class UserService {
         return userDtoConverter.convert(userRepository.save(updatedUser));
     }
 
-    public void deactivateUser(Long id) {
+    public void deactivateUser(final Long id) {
         changeStatusUser(id, false);
     }
 
-    public void activateUser(Long id) {
+    public void activateUser(final Long id) {
         changeStatusUser(id, true);
     }
 
-    public void deleteUser(Long id) {
+    public void deleteUser(final Long id) {
             findUserById(id);
             userRepository.deleteById(id);
 
     }
 
-    private void changeStatusUser(Long id, Boolean status) {
+    private void changeStatusUser(final Long id, Boolean status) {
         User user = findUserById(id);
         User updatedUser = new User(user.getId(),
                 user.getMail(),
@@ -90,7 +90,7 @@ public class UserService {
                 orElseThrow(() -> new UserNotFoundException("User couldn't be found by following mail: " + mail));
     }
 
-    private User findUserById(Long id) {
+    protected User findUserById(Long id) {
         return userRepository.findById(id).
                 orElseThrow(() -> new UserNotFoundException("User couldn't be found by following id: " + id));
     }
