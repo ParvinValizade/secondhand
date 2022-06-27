@@ -19,8 +19,7 @@ data class Advertisement(
     val creationDate: LocalDateTime,
     val lastModifiedDate: LocalDateTime,
 
-    val userId: Long?,
-    val hashtags: Set<String> = HashSet()
+    val userId: Long?
 ){
     constructor(
         title: String,
@@ -28,8 +27,7 @@ data class Advertisement(
         description: String,
         creationDate: LocalDateTime,
         lastModifiedDate: LocalDateTime,
-        userId: Long,
-        hashtags: Set<String>) : this(
+        userId: Long) : this(
 
         null,
         title = title,
@@ -37,8 +35,7 @@ data class Advertisement(
         description = description,
         creationDate = creationDate,
         lastModifiedDate = lastModifiedDate,
-        userId = userId,
-        hashtags = hashtags
+        userId = userId
     )
 
     override fun equals(other: Any?): Boolean {
@@ -54,7 +51,6 @@ data class Advertisement(
         if (creationDate != other.creationDate) return false
         if (lastModifiedDate != other.lastModifiedDate) return false
         if (userId != other.userId) return false
-        if (hashtags != other.hashtags) return false
 
         return true
     }
@@ -67,7 +63,6 @@ data class Advertisement(
         result = 31 * result + creationDate.hashCode()
         result = 31 * result + lastModifiedDate.hashCode()
         result = 31 * result + (userId?.hashCode() ?: 0)
-        result = 31 * result + hashtags.hashCode()
         return result
     }
 

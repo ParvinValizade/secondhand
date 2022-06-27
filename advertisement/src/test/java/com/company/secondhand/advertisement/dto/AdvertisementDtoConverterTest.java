@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,8 +19,7 @@ public class AdvertisementDtoConverterTest {
                 "description1",
                 LocalDateTime.now(),
                 LocalDateTime.now(),
-                100L,
-                Set.of("hashtag1","hashtag2")
+                100L
         );
 
         AdvertisementDto advertisementDto = AdvertisementDtoConverter.INSTANCE.convertDto(advertisement);
@@ -30,7 +28,6 @@ public class AdvertisementDtoConverterTest {
         assertEquals(advertisementDto.getDescription(),"description1");
         assertEquals(advertisementDto.getPrice(),new BigDecimal(123));
         assertEquals(advertisementDto.getUserId(),100L);
-        assertEquals(advertisementDto.getHashtags(),Set.of("hashtag1","hashtag2"));
 
     }
 

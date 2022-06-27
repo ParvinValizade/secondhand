@@ -6,6 +6,5 @@ data class CreateAdvertisementRequest(
     val title: String,
     val description: String,
     val price: BigDecimal,
-    val userId: Long,
-    val hashtag: Set<String>
+    val userId: Long
 )

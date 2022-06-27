@@ -10,6 +10,5 @@ data class AdvertisementDto(
     val description: String,
     val creationDate: LocalDateTime,
     val lastModifiedDate: LocalDateTime,
-    val userId: Long,
-    val hashtags: Set<String>
+    val userId: Long
 )
