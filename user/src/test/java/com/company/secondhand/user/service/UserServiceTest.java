@@ -12,6 +12,7 @@ import com.company.secondhand.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,7 +85,7 @@ public class UserServiceTest extends TestSupport {
         CreateUserRequest request = new CreateUserRequest(mail,"Parvin","Valizade","Pempi");
         User user = new User(mail,"Parvin","Valizade","Pempi",false);
         User savedUser = new User(1l,mail,"Parvin","Valizade","Pempi",false);
-        UserDto userDto = new UserDto(mail,"Parvin","Valizade","Pempi");
+        UserDto userDto = new UserDto(mail,"Parvin","Valizade","Pempi",new ArrayList<>());
 
         when(repository.save(user)).thenReturn(savedUser);
         when(converter.convert(savedUser)).thenReturn(userDto);
@@ -105,7 +106,7 @@ public class UserServiceTest extends TestSupport {
         User user = new User(1L,mail,"Parvin","Valizade","Pempi",true);
         User savedUser = new User(1L,mail,"Parvin","Valizade","Ostwind",true);
         User updatedUser = new User(1L,mail,"Parvin","Valizade","Ostwind",true);
-        UserDto userDto = new UserDto(mail,"Parvin","Valizade","Ostwind");
+        UserDto userDto = new UserDto(mail,"Parvin","Valizade","Ostwind",new ArrayList<>());
 
         when(repository.findByMail(mail)).thenReturn(Optional.of(user));
         when(repository.save(updatedUser)).thenReturn(savedUser);
